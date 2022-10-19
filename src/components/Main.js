@@ -1,3 +1,4 @@
+import React from 'react';
 import penFoto from '../pictures/penfoto.svg'
 
 function Main (props) {
