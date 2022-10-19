@@ -3,18 +3,42 @@
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
+import PopupWithForm from './PopupWithForm.js';
+import popupChilds from './popupChilds.js';
 
 function App() {
+  let isEditProfilePopupOpen = false;
+  let isAddPlacePopupOpen = false;
+  let isEditAvatarPopupOpen = false
+
+  function handleEditAvatarClick() {
+    
+    isEditAvatarPopupOpen = true
+  }
+
+  function handleEditProfileClick() {
+    const popupEdit = document.querySelector('.popup_type_edit');
+    popupEdit.classList.add('popup_is-open')
+  }
+
+  function handleAddPlaceClick() {
+    const popupAdd = document.querySelector('.popup_type_add');
+    popupAdd.classList.add('popup_is-open')
+  }
+
+
   return (
 
     <>
-    <div className="root">
-      <div className="page">
-        <Header />
-        <Main />
-        <Footer />
-      </div>
-      <div className="popup popup_type_edit">
+      <div className="root">
+        <div className="page">
+          <Header />
+          <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}/>
+          <Footer />
+          
+          {isEditAvatarPopupOpen && <PopupWithForm name={'avatar'} title={'Обновить аватар'} child={popupChilds.avatar}/>}
+        </div>
+        <div className="popup popup_type_edit">
         <div className="popup__content">
           <button type="button" className="popup__close" />
           <h3 className="popup__title">Редактировать профиль</h3>
@@ -59,7 +83,7 @@ function App() {
           <form
             className="popup__form popup__form_type_add"
             action="#"
-            name="add-cards"
+            name="add-profile"
             noValidate=""
           >
             <input
@@ -99,7 +123,7 @@ function App() {
           </button>
         </div>
       </div>
-      <div className="popup popup_type_avatar">
+      {/* <div className="popup popup_type_avatar">
         <div className="popup__content popup__content_type_avatar">
           <button type="button" className="popup__close" />
           <h3 className="popup__title popup__title_type_avatar">
@@ -108,7 +132,7 @@ function App() {
           <form
             className="popup__form popup__form_type_avatar"
             action="#"
-            name="edit-avatar"
+            name="avatar-profile"
             noValidate=""
           >
             <input
@@ -125,7 +149,7 @@ function App() {
             </button>
           </form>
         </div>
-      </div>
+      </div> */}
       <div className="popup popup_type_photo">
         <div className="popup__photo-container">
           <button type="button" className="popup__close popup__close_type_photo" />
@@ -133,7 +157,7 @@ function App() {
           <p className="popup__place" />
         </div>
       </div>
-      <template className="elements__template" />
+        <template className="elements__template" />
       </div>
     </>
 

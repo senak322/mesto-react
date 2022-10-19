@@ -1,18 +1,8 @@
 import penFoto from '../pictures/penfoto.svg'
 
-function Main () {
+function Main (props) {
 
-    function handleEditAvatarClick() {
-        
-    }
-
-    function handleEditProfileClick() {
-
-    }
-
-    function handleAddPlaceClick() {
-      
-    }
+    
 
     return (
         <main className="content">
@@ -23,19 +13,19 @@ function Main () {
                 <div className="profile__foto profile__foto_type_overlay">
                   <img
                     className="profile__pen"
-                    src={penFoto} onClick={handleEditAvatarClick}
+                    src={penFoto} onClick={props.onEditAvatar}
                   />
                 </div>
               </div>
               <div className="profile__info">
                 <div className="profile__container">
                   <h1 className="profile__name" />
-                  <button type="button" className="profile__edit" onClick={handleEditProfileClick} />
+                  <button type="button" className="profile__edit" onClick={props.onEditProfile} />
                 </div>
                 <p className="profile__job" />
               </div>
             </div>
-            <button type="button" className="profile__add" onClick={handleAddPlaceClick} />
+            <button type="button" className="profile__add" onClick={props.onAddPlace} />
           </section>
           <section className="elements"></section>
         </main>
