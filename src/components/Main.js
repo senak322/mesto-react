@@ -1,6 +1,7 @@
 import React from 'react';
 import penFoto from '../pictures/penfoto.svg';
 import { api } from '../utils/Api.js';
+import Card from './Card.js';
 
 
 function Main(props) {
@@ -53,20 +54,9 @@ function Main(props) {
         <button type="button" className="profile__add" onClick={props.onAddPlace} />
       </section>
       <section className="elements">
-        {cards.map(card => (
+        {cards.map(cardEl => (
           
-          <article key={card._id} className="elements__item">
-          <img className="elements__image" src={card.link} alt={card.name} />
-          <button type="button" className="elements__delete" />
-          <div className="elements__caption">
-            <h2 className="elements__title">{card.name}</h2>
-            <div className="elements__container">
-              <button type="button" className="elements__like" />
-              <span className="elements__counter">{card.likes.length}</span>
-            </div>
-          </div>
-        </article>
-          
+          <Card card={cardEl} onCardClick={props.onCardClick}/>
         ))}
       </section>
     </main>
