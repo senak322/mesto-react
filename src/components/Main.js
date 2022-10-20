@@ -56,13 +56,13 @@ function Main(props) {
         {cards.map(card => (
           
           <article key={card._id} className="elements__item">
-          <img className="elements__image" src="#" alt="" />
+          <img className="elements__image" src={card.link} alt={card.name} />
           <button type="button" className="elements__delete" />
           <div className="elements__caption">
-            <h2 className="elements__title" />
+            <h2 className="elements__title">{card.name}</h2>
             <div className="elements__container">
               <button type="button" className="elements__like" />
-              <span className="elements__counter" />
+              <span className="elements__counter">{card.likes.length}</span>
             </div>
           </div>
         </article>
