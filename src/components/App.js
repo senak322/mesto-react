@@ -34,7 +34,7 @@ function App() {
   return (
 
     <>
-      <div className="root">
+      
         <div className="page">
           <Header />
           <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}/>
@@ -45,7 +45,7 @@ function App() {
           <PopupWithForm name={'delete'} title={'Вы уверены?'} child={popupChilds.delete} isOpen={false} onClose={closeAllPopups}/>
         </div>
         <template className="elements__template" />
-      </div>
+      
     </>
 
   );
