@@ -22,14 +22,14 @@ function Main(props) {
     }).catch((err) => { console.log(err) });
 
     api.getImages().then(res => {
-      setCards([...res])
+      setCards(res)
     }).catch((err) => { console.log(err) })
 
 
   }, [])
 
   
-
+console.log(cards);
   return (
     <main className="content">
       <section className="profile">
