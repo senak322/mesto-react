@@ -35,12 +35,13 @@ function App() {
   }
 
   function handleEditProfileClick() {
-    setIsAddPlacePopupOpen(!isAddPlacePopupOpen)
+    setIsEditProfilePopupOpen(!isEditProfilePopupOpen)
   }
 
   function handleAddPlaceClick() {
-    setIsEditProfilePopupOpen(!isEditProfilePopupOpen)
+    setIsAddPlacePopupOpen(!isAddPlacePopupOpen)
   }
+
 
   
   return (
@@ -51,10 +52,10 @@ function App() {
           <Header />
           <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
           <Footer />
-          <PopupWithForm name={'avatar'} title={'Обновить аватар'} child={popupChilds.avatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
-          <PopupWithForm name={'edit'} title={'Редактировать профиль'} child={popupChilds.edit} isOpen={isEditProfilePopupOpen}onClose={closeAllPopups}/>
-          <PopupWithForm name={'add'} title={'Новое место'} child={popupChilds.add} isOpen={isAddPlacePopupOpen}onClose={closeAllPopups}/>
-          <PopupWithForm name={'delete'} title={'Вы уверены?'} child={popupChilds.delete} isOpen={false} onClose={closeAllPopups}/>
+          <PopupWithForm name={'avatar'} title={'Обновить аватар'} buttonText={'Сохранить'} child={popupChilds.avatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
+          <PopupWithForm name={'edit'} title={'Редактировать профиль'} buttonText={'Сохранить'} child={popupChilds.edit} isOpen={isEditProfilePopupOpen}onClose={closeAllPopups}/>
+          <PopupWithForm name={'add'} title={'Новое место'} buttonText={'Создать'} child={popupChilds.add} isOpen={isAddPlacePopupOpen}onClose={closeAllPopups}/>
+          <PopupWithForm name={'delete'} title={'Вы уверены?'} buttonText={'Да'} child={popupChilds.delete} isOpen={false} onClose={closeAllPopups}/>
           
           <ImagePopup isSelect={isSelect} card={selectedCard} onClose={closeAllPopups}/>
         </div>

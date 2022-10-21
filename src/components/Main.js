@@ -19,16 +19,16 @@ function Main(props) {
       setUserName(res.name);
       setUserDescription(res.about);
       setUserAvatar(res.avatar)
-    });
+    }).catch((err) => { console.log(err) });
 
     api.getImages().then(res => {
       setCards([...res])
-    })
+    }).catch((err) => { console.log(err) })
 
 
   }, [])
 
-  console.log(cards);
+  
 
   return (
     <main className="content">
@@ -36,10 +36,10 @@ function Main(props) {
         <div className="profile__user-info">
           <div className="profile__wrapper">
             <img className="profile__foto" alt="фото профиля" src={userAvatar} />
-            <div className="profile__foto profile__foto_type_overlay">
+            <div className="profile__foto profile__foto_type_overlay" onClick={props.onEditAvatar}>
               <img
                 className="profile__pen"
-                src={penFoto} onClick={props.onEditAvatar}
+                src={penFoto} 
               />
             </div>
           </div>
@@ -56,7 +56,7 @@ function Main(props) {
       <section className="elements">
         {cards.map(cardEl => (
           
-          <Card card={cardEl} onCardClick={props.onCardClick}/>
+          <Card card={cardEl} key={cardEl._id} onCardClick={props.onCardClick}/>
         ))}
       </section>
     </main>
