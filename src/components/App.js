@@ -6,6 +6,8 @@ import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import popupChilds from './popupChilds.js';
 import ImagePopup from './ImagePopup.js';
+import { api } from '../utils/Api.js';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 
 function App() {
@@ -15,8 +17,14 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [isSelect, setIsSelect] = React.useState(false);
 
+  const [currentUser, setCurrentUser] = React.useState({})
 
-  
+  React.useEffect(() => {
+    api.getProfileInfo().then(res => {
+      setCurrentUser(res)
+    }).catch((err) => { console.log(err) });
+  }, [])
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -24,8 +32,9 @@ function App() {
     setIsSelect(false)
     setSelectedCard({});
   }
+  
 
-  function handleCardClick (card) {
+  function handleCardClick(card) {
     setSelectedCard(card);
     setIsSelect(true)
   }
@@ -43,24 +52,26 @@ function App() {
   }
 
 
-  
+
   return (
 
     <>
-      
-        <div className="page">
+
+      <div className="page">
+        <CurrentUserContext.Provider value={currentUser}>
           <Header />
-          <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
+          <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
           <Footer />
-          <PopupWithForm name={'avatar'} title={'Обновить аватар'} buttonText={'Сохранить'} child={popupChilds.avatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
-          <PopupWithForm name={'edit'} title={'Редактировать профиль'} buttonText={'Сохранить'} child={popupChilds.edit} isOpen={isEditProfilePopupOpen}onClose={closeAllPopups}/>
-          <PopupWithForm name={'add'} title={'Новое место'} buttonText={'Создать'} child={popupChilds.add} isOpen={isAddPlacePopupOpen}onClose={closeAllPopups}/>
-          <PopupWithForm name={'delete'} title={'Вы уверены?'} buttonText={'Да'} child={popupChilds.delete} isOpen={false} onClose={closeAllPopups}/>
-          
-          <ImagePopup isSelect={isSelect} card={selectedCard} onClose={closeAllPopups}/>
-        </div>
-        <template className="elements__template" />
-      
+          <PopupWithForm name={'avatar'} title={'Обновить аватар'} buttonText={'Сохранить'} child={popupChilds.avatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+          <PopupWithForm name={'edit'} title={'Редактировать профиль'} buttonText={'Сохранить'} child={popupChilds.edit} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+          <PopupWithForm name={'add'} title={'Новое место'} buttonText={'Создать'} child={popupChilds.add} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
+          <PopupWithForm name={'delete'} title={'Вы уверены?'} buttonText={'Да'} child={popupChilds.delete} isOpen={false} onClose={closeAllPopups} />
+
+          <ImagePopup isSelect={isSelect} card={selectedCard} onClose={closeAllPopups} />
+        </CurrentUserContext.Provider>
+      </div>
+
+
     </>
 
   );
