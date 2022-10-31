@@ -81,6 +81,16 @@
     .then(this._getResponseData)
   }
 
+  changeLikeCardStatus(cardId, isLiked) {
+    if (isLiked) {
+      this.status = this.unLikeCard(cardId);
+      return this.status
+    } else {
+      this.status = this.likeCard(cardId);
+      return this.status
+    }
+  }
+
   setAvatar(url) {
     return fetch(`${this._url}/v1/cohort-50/users/me/avatar`, {
       method: 'PATCH',
