@@ -10,32 +10,32 @@ function Main(props) {
   // const [userName, setUserName] = React.useState();
   // const [userDescription, setUserDescription] = React.useState();
   // const [userAvatar, setUserAvatar] = React.useState();
-  const [cards, setCards] = React.useState([]);
+  // const [cards, setCards] = React.useState([]);
 
   const userContext = React.useContext(CurrentUserContext)
 
 
-  React.useEffect(() => {
-    api.getImages().then(res => {
-      setCards(res)
-    }).catch((err) => { console.log(err) })
-  }, [])
+  // React.useEffect(() => {
+  //   api.getImages().then(res => {
+  //     setCards(res)
+  //   }).catch((err) => { console.log(err) })
+  // }, [])
 
-  function handleCardLike(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === userContext._id);
+//   function handleCardLike(card) {
+//     // Снова проверяем, есть ли уже лайк на этой карточке
+//     const isLiked = card.likes.some(i => i._id === userContext._id);
     
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
-        setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
-    }).catch((err) => { console.log(err) });
-}
+//     // Отправляем запрос в API и получаем обновлённые данные карточки
+//     api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
+//         setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
+//     }).catch((err) => { console.log(err) });
+// }
 
-function handleCardDelete (card) {
-  api.deleteCard(card._id).then(newCards => {
-    setCards((cards)=> cards.filter((el)=> el._id !== card._id))
-  }).catch((err) => { console.log(err) })
-}
+// function handleCardDelete (card) {
+//   api.deleteCard(card._id).then(newCards => {
+//     setCards((cards)=> cards.filter((el)=> el._id !== card._id))
+//   }).catch((err) => { console.log(err) })
+// }
   
 
   return (
@@ -62,9 +62,9 @@ function handleCardDelete (card) {
         <button type="button" className="profile__add" onClick={props.onAddPlace} />
       </section>
       <section className="elements">
-        {cards.map(cardEl => (
+        {props.cards.map(cardEl => (
           
-          <Card card={cardEl} key={cardEl._id} onCardClick={props.onCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
+          <Card card={cardEl} key={cardEl._id} onCardClick={props.onCardClick} onCardLike={props.onCardLike} onCardDelete={props.onCardDelete}/>
         ))}
       </section>
     </main>
