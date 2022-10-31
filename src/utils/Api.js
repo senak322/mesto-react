@@ -37,7 +37,7 @@
       headers: this._headers,
       body: JSON.stringify({
         name: values.name,
-        about: values.job
+        about: values.about
       })
     })
     .then(this._getResponseData)

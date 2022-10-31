@@ -1,32 +1,7 @@
+import EditProfilePopup from './EditProfilePopup.js'
+
 const popupChilds = {
-  edit: (
-    <>
-      <input
-        className="popup__input popup__input_type_name"
-        id="name"
-        name="name"
-        type="text"
-        placeholder="Введите имя"
-        required=""
-        minLength={2}
-        maxLength={40}
-      />
-      <span className="popup__error name-error" />
-      <input
-        className="popup__input popup__input_type_job"
-        id="job"
-        name="job"
-        type="text"
-        placeholder="Укажите профессию"
-        required=""
-        minLength={2}
-        maxLength={200}
-      />
-      <span className="popup__error job-error" />
-      
-    </>
-  )
-  ,
+  
   add: (
     <>
       <input

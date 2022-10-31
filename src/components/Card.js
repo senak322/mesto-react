@@ -26,10 +26,14 @@ function Card(props) {
     props.onCardClick(props.card)
   }
 
+  function handleDeleteClick() {
+    props.onCardDelete(props.card)
+  }
+
   return (
     <article className="elements__item">
       <img className="elements__image" src={props.card.link} alt={props.card.name} onClick={handleClick} />
-      <button type="button" className={cardDeleteButtonClassName} />
+      <button type="button" className={cardDeleteButtonClassName} onClick={handleDeleteClick}/>
       <div className="elements__caption">
         <h2 className="elements__title">{props.card.name}</h2>
         <div className="elements__container">

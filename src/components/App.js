@@ -8,6 +8,7 @@ import popupChilds from './popupChilds.js';
 import ImagePopup from './ImagePopup.js';
 import { api } from '../utils/Api.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+import EditProfilePopup from './EditProfilePopup.js'
 
 
 function App() {
@@ -51,6 +52,13 @@ function App() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen)
   }
 
+  function handleUpdateUser (data) {
+    api.editInfo(data).then(res => {
+      setCurrentUser(res)
+    }).catch((err) => { console.log(err) });
+    closeAllPopups()
+  }
+
 
 
   return (
@@ -62,8 +70,8 @@ function App() {
           <Header />
           <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
           <Footer />
+          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
           <PopupWithForm name={'avatar'} title={'Обновить аватар'} buttonText={'Сохранить'} child={popupChilds.avatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
-          <PopupWithForm name={'edit'} title={'Редактировать профиль'} buttonText={'Сохранить'} child={popupChilds.edit} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
           <PopupWithForm name={'add'} title={'Новое место'} buttonText={'Создать'} child={popupChilds.add} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
           <PopupWithForm name={'delete'} title={'Вы уверены?'} buttonText={'Да'} child={popupChilds.delete} isOpen={false} onClose={closeAllPopups} />
 
