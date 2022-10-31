@@ -3,20 +3,23 @@ import React from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
-import PopupWithForm from './PopupWithForm.js';
-import popupChilds from './popupChilds.js';
+// import PopupWithForm from './PopupWithForm.js';
+// import popupChilds from './popupChilds.js';
 import ImagePopup from './ImagePopup.js';
 import { api } from '../utils/Api.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
+import DeletePopup from './DeletePopup.js';
 
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
+  const [deletedCard, setDeletedCard] = React.useState({})
   const [selectedCard, setSelectedCard] = React.useState({});
   const [isSelect, setIsSelect] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
@@ -44,7 +47,8 @@ function App() {
   function handleCardDelete(card) {
     api.deleteCard(card._id).then(newCards => {
       setCards((cards) => cards.filter((el) => el._id !== card._id))
-    }).catch((err) => { console.log(err) })
+    }).catch((err) => { console.log(err) }).finally(closeAllPopups())
+    
   }
 
   
@@ -61,6 +65,8 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsSelect(false)
     setSelectedCard({});
+    setIsDeletePopupOpen(false);
+    setDeletedCard({})
   }
 
 
@@ -102,6 +108,11 @@ function App() {
     closeAllPopups()
   }
 
+  function handleDeleteClick(card) {
+    setIsDeletePopupOpen(!isDeletePopupOpen);
+    setDeletedCard(card);
+  }
+
 
   return (
 
@@ -110,12 +121,12 @@ function App() {
       <div className="page">
         <CurrentUserContext.Provider value={currentUser}>
           <Header />
-          <Main cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
+          <Main cards={cards} onCardLike={handleCardLike} onCardDelete={handleDeleteClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
           <Footer />
           <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
           <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
           <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
-          <PopupWithForm name={'delete'} title={'Вы уверены?'} buttonText={'Да'} child={popupChilds.delete} isOpen={false} onClose={closeAllPopups} />
+          <DeletePopup isOpen={isDeletePopupOpen} onClose={closeAllPopups} onDelete={handleCardDelete} card={deletedCard} />
 
           <ImagePopup isSelect={isSelect} card={selectedCard} onClose={closeAllPopups} />
         </CurrentUserContext.Provider>
