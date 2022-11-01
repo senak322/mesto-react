@@ -47,7 +47,8 @@ function App() {
   function handleCardDelete(card) {
     api.deleteCard(card._id).then(newCards => {
       setCards((cards) => cards.filter((el) => el._id !== card._id))
-    }).catch((err) => { console.log(err) }).finally(closeAllPopups())
+      closeAllPopups()
+    }).catch((err) => { console.log(err) })
     
   }
 
@@ -89,23 +90,26 @@ function App() {
 
   function handleUpdateUser(data) {
     api.editInfo(data).then(res => {
-      setCurrentUser(res)
+      setCurrentUser(res);
+      closeAllPopups()
     }).catch((err) => { console.log(err) });
-    closeAllPopups()
+    
   }
 
   function handleUpdateAvatar(data) {
     api.setAvatar(data).then(res => {
-      setCurrentUser(res)
+      setCurrentUser(res);
+      closeAllPopups()
     }).catch((err) => { console.log(err) });
-    closeAllPopups()
+    
   }
 
   function handleAddPlaceSubmit(data) {
     api.addCard(data).then(res => {
       setCards([res, ...cards]);
+      closeAllPopups()
     }).catch((err) => { console.log(err) });
-    closeAllPopups()
+    
   }
 
   function handleDeleteClick(card) {
