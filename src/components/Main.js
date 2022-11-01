@@ -7,36 +7,7 @@ import {CurrentUserContext } from '../contexts/CurrentUserContext.js'
 
 function Main(props) {
 
-  // const [userName, setUserName] = React.useState();
-  // const [userDescription, setUserDescription] = React.useState();
-  // const [userAvatar, setUserAvatar] = React.useState();
-  // const [cards, setCards] = React.useState([]);
-
   const userContext = React.useContext(CurrentUserContext)
-
-
-  // React.useEffect(() => {
-  //   api.getImages().then(res => {
-  //     setCards(res)
-  //   }).catch((err) => { console.log(err) })
-  // }, [])
-
-//   function handleCardLike(card) {
-//     // Снова проверяем, есть ли уже лайк на этой карточке
-//     const isLiked = card.likes.some(i => i._id === userContext._id);
-    
-//     // Отправляем запрос в API и получаем обновлённые данные карточки
-//     api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
-//         setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
-//     }).catch((err) => { console.log(err) });
-// }
-
-// function handleCardDelete (card) {
-//   api.deleteCard(card._id).then(newCards => {
-//     setCards((cards)=> cards.filter((el)=> el._id !== card._id))
-//   }).catch((err) => { console.log(err) })
-// }
-  
 
   return (
     <main className="content">
