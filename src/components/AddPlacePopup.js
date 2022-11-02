@@ -15,11 +15,11 @@ function AddPlacePopup(props) {
 
   React.useEffect(() => {
     setValues({});
-    
-}, [props.isOpen]);
+
+  }, [props.isOpen]);
 
   return (
-    <PopupWithForm name={'add'} title={'Новое место'} buttonText={'Создать'} child={<>
+    <PopupWithForm name={'add'} title={'Новое место'} buttonText={props.isLoading ? 'Сохранение...' : 'Создать'} children={<>
       <input
         className="popup__input popup__input_type_place"
         id="place"
@@ -43,9 +43,10 @@ function AddPlacePopup(props) {
         value={values.link || ''}
         onChange={handleChange}
       />
-      <span className="popup__error popup__error_type_active link-error" />
+      <span className="popup__error popup__error_type_active link-error" /></>}
 
-    </>} isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit} />)
+     isOpen = { props.isOpen } onClose = { props.onClose } onSubmit = { handleSubmit } />)
+     
 }
 
 export default AddPlacePopup;

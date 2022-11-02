@@ -16,7 +16,7 @@ function EditProfilePopup(props) {
     React.useEffect(() => {
         setName(currentUser.name);
         setDescription(currentUser.about);
-    }, [currentUser]);
+    }, [currentUser, props.isOpen ]);
 
     function handleChangeName(e) {
         setName(e.target.value)
@@ -38,7 +38,7 @@ function EditProfilePopup(props) {
       }
 
     return (
-        <PopupWithForm name={'edit'} title={'Редактировать профиль'} buttonText={'Сохранить'} child={<>
+        <PopupWithForm name={'edit'} title={'Редактировать профиль'} buttonText={props.isLoading ? 'Сохранение...' : 'Сохранить'} children={<>
             <input
                 className="popup__input popup__input_type_name"
                 id="name"

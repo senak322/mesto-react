@@ -17,7 +17,7 @@ function EditAvatarPopup(props) {
     }, [props.isOpen]);
 
     return (
-        <PopupWithForm name={'avatar'} title={'Обновить аватар'} buttonText={'Сохранить'} child={<>
+        <PopupWithForm name={'avatar'} title={'Обновить аватар'}  buttonText={props.isLoading ? 'Сохранение...' : 'Сохранить'} children={<> 
             <input
                 className="popup__input popup__input_type_link"
                 id="avatar"

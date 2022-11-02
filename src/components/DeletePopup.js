@@ -9,7 +9,7 @@ function DeletePopup(props) {
     }
 
     return (
-    <PopupWithForm name={'delete'} title={'Вы уверены?'} buttonText={'Да'} isOpen={props.isOpen} onSubmit={handleSubmit} onClose={props.onClose} />)
+    <PopupWithForm name={'delete'} title={'Вы уверены?'} buttonText={props.isLoading ? 'Сохранение...' : 'Да'} isOpen={props.isOpen} onSubmit={handleSubmit} onClose={props.onClose} />)
 }
 
 export default DeletePopup;
