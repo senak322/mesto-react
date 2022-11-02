@@ -19,6 +19,7 @@ function Main(props) {
               <img
                 className="profile__pen"
                 src={penFoto} 
+                alt='Изменить фото'
               />
             </div>
           </div>
